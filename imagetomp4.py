@@ -186,9 +186,11 @@ def videowriter(left_image,right_image):
     #
     # return render_template('index.html', img=IMAGE_URL_BASE + s3path + '?z=' + str(time.clock()))
 
-    out = cv2.VideoWriter(os.getcwd()+'output.mp4', cv2.cv.CV_FOURCC('m', 'p', '4', 'v'), 4, (364,316))
+    out = cv2.VideoWriter(os.getcwd()+'output.mp4v', cv2.cv.CV_FOURCC('m', 'p', '4', 'v'), 4, (364,316))
     for image in gif_frames:
-        out.write(image)
+        open_cv_image = np.array(image)
+        out.write(open_cv_image)
 
     out.release()
+
     # return out
