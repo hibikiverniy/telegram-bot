@@ -8,13 +8,14 @@ from PIL import ImageEnhance
 import pprint
 import sys
 import numpy as np
-# from i2g import writeGif
+from i2g import writeGif
 # from boto.s3.connection import S3Connection
 # from boto.s3.key import Key
 # import boto
 # import hashlib
-import time
 import cv2
+import time
+
 
 CANVAS_WIDTH=364
 CANVAS_HEIGHT=316
@@ -166,6 +167,7 @@ def videowriter(left_image,right_image):
             if (right_page_coords[0] != (0,0)):
                 over = over + over_right.warp(right_page_coords)
 
+
         foreground = PIL.Image.open(os.path.dirname(__file__) + '/trumps/trump_clipped_' + str(i) + '.png')
 
         if (over):
@@ -186,11 +188,18 @@ def videowriter(left_image,right_image):
     #
     # return render_template('index.html', img=IMAGE_URL_BASE + s3path + '?z=' + str(time.clock()))
 
-    out = cv2.VideoWriter(os.getcwd()+'output.mp4v', cv2.cv.CV_FOURCC('m', 'p', '4', 'v'), 4, (364,316))
-    for image in gif_frames:
-        open_cv_image = np.array(image)
-        out.write(open_cv_image)
+    # out = cv2.VideoWriter(os.getcwd()+'output.mp4v', cv2.cv.CV_FOURCC('m', 'p', '4', 'v'), 4, (364,316))
+    # number = 0
+    # for image in gif_frames:
+    #     # open_cv_image = np.array(image)
+    #     # out.write(open_cv_image)
+    #     image.save(os.getcwd() + '/list/'+str(number)+'.png')
+    #     number+=1
 
-    out.release()
+
+    writeGif(os.getcwd() + '/list/hibiki'+'.gif', gif_frames, duration=0.24)
+
+
+    # out.release()
 
     # return out
